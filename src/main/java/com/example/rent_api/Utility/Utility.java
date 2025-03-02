@@ -8,7 +8,6 @@ import jakarta.persistence.Table;
 @Entity
 @Table
 public class Utility {
-
     @Id
     @GeneratedValue
     private Long id;

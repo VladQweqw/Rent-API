@@ -1,4 +1,7 @@
 package com.example.rent_api.User;
 
-public class UserRepository {
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+public interface UserRepository extends MongoRepository<User, String> {
+
 }

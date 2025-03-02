@@ -14,6 +14,6 @@ public class UtilityService {
     }
 
     public String check() {
-        return "SUCCESS";
+        return "Success";
     }
 }
