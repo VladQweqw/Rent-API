@@ -11,8 +11,7 @@ import java.util.List;
 @Entity
 public class User {
     @Id
-    @GeneratedValue
-    private Long id;
+    private String  id;
 
     private String name;
     private String email;
@@ -52,7 +51,7 @@ public class User {
                 '}';
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -80,7 +79,7 @@ public class User {
         this.type = type;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 

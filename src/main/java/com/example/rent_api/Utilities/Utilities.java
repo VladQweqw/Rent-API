@@ -11,8 +11,7 @@ import java.util.List;
 public class Utilities {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    private String  id;
 
     // oneToMany
     @OneToMany(mappedBy = "rent_id", cascade = CascadeType.ALL)
@@ -39,7 +38,7 @@ public class Utilities {
                 '}';
     }
 
-    public void setId(Long id) {
+    public void setId(String  id) {
         this.id = id;
     }
 
@@ -51,7 +50,7 @@ public class Utilities {
         this.utilities = utilities;
     }
 
-    public Long getId() {
+    public String  getId() {
         return id;
     }
 

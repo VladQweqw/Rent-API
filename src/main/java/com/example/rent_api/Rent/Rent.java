@@ -8,8 +8,7 @@ import jakarta.persistence.*;
 @Table
 public class Rent {
     @Id
-    @GeneratedValue
-    private Long id;
+    private String id;
 
     @ManyToOne()
     @JoinColumn(name = "user_id")
@@ -43,7 +42,7 @@ public class Rent {
                 '}';
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -59,7 +58,7 @@ public class Rent {
         this.utilities = utilities;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 

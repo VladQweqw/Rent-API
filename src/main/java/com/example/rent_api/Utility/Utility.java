@@ -1,22 +1,21 @@
 package com.example.rent_api.Utility;
 
+import com.example.rent_api.Utilities.Utilities;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table
 public class Utility {
     @Id
-    @GeneratedValue
-    private Long id;
+    private String id;
 
     private String name;
     private Double value;
     private Double price_per_unit;
     private String currency;
-
 
     public Utility() {
 
@@ -40,7 +39,7 @@ public class Utility {
                 '}';
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -60,7 +59,7 @@ public class Utility {
         this.currency = currency;
     }
 
-    public Long getId() {
+    public String  getId() {
         return id;
     }
 
