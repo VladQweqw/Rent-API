@@ -1,21 +1,16 @@
 package com.example.rent_api.Rent;
 
-import com.example.rent_api.Utilities.UtilitiesService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/rent")
+@AllArgsConstructor
 public class RentController {
 
     private final RentService rentService;
 
-    @Autowired
-    public RentController(RentService rentService) {
-        this.rentService = rentService;
-    }
-
-    @GetMapping(name = "{id}")
+    @GetMapping(path = "{id}")
     public Rent get_by_id(
             @PathVariable("id") String id
     ) {
@@ -24,21 +19,21 @@ public class RentController {
 
     @PostMapping
     public Rent create_rent(
-            @RequestBody Rent rent
+            @RequestBody RentRequest rent
     ) {
         return rentService.create_rent(rent);
     }
 
-    @PutMapping(name = "{id}")
+    @PutMapping(path = "{id}")
     public Rent update_rent(
             @PathVariable("id") String id,
-            @RequestBody Rent rent
+            @RequestBody RentRequest rent
     ) {
         return rentService.update_rent(id, rent);
     }
 
 
-    @DeleteMapping(name = "{id}")
+    @DeleteMapping(path = "{id}")
     public void delete_rent(
             @PathVariable("id") String id
     ) {

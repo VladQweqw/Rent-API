@@ -1,5 +1,10 @@
 package com.example.rent_api.Rent;
 
+import com.example.rent_api.User.User;
+import com.example.rent_api.User.UserRepository;
+import com.example.rent_api.Utilities.Utilities;
+import com.example.rent_api.Utilities.UtilitiesRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -7,14 +12,11 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class RentService {
-
     private final RentRepository rentRepository;
-
-    public RentService(RentRepository rentRepository) {
-        this.rentRepository = rentRepository;
-    }
-
+    private final UserRepository userRepository;
+    private final UtilitiesRepository utilitiesRepository;
 
     public String check() {
         return "Success";
@@ -26,21 +28,66 @@ public class RentService {
         });
     }
 
-    public Rent create_rent(Rent rent) {
+    public Rent create_rent(RentRequest request) {
+        User landlord = userRepository.findById(request.getLandlord()).orElseThrow(() -> {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid Landlord ID");
+        });
+
+        Rent rent = new Rent();
+
+        rent.setLandlord(landlord);
+        rent.setName(request.getName());
+
+        if(request.getTenant() != null) {
+            rent.setTenant(
+                userRepository.findById(request.getTenant()).orElse(null));
+        }
+
+        if(request.getUtilities() != null) {
+            rent.setUtilities(
+                    utilitiesRepository.findById(request.getUtilities()).orElse(null)
+            );
+        }
+
 
         return rentRepository.save(rent);
     }
 
-    public Rent update_rent(String id, Rent rent) {
+    public Rent update_rent(String id, RentRequest request) {
         Rent new_rent = rentRepository.findById(id).orElseThrow(() -> {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid Rent ID");
+            throw new IllegalStateException("Invalid rent ID");
         });
 
-        new_rent.setLandlord(rent.getLandlord());
-        new_rent.setTenant(rent.getTenant());
-        new_rent.setUtilities(rent.getUtilities());
+        if(request.getUtilities() != null) {
+            new_rent.setUtilities(
+                    utilitiesRepository.findById(request.getUtilities()).orElseThrow(() -> {
+                        throw new IllegalStateException("Invalid utilities ID");
+                    })
+            );
+        }
 
-        return rentRepository.save(rent);
+        if(request.getLandlord() != null) {
+            new_rent.setLandlord(
+                    userRepository.findById(request.getLandlord()).orElseThrow(() -> {
+                        throw new IllegalStateException("Invalid landlord ID");
+                    })
+            );
+        }
+
+        if(request.getTenant() != null) {
+            new_rent.setTenant(
+                    userRepository.findById(request.getTenant()).orElseThrow(() -> {
+                        throw new IllegalStateException("Invalid tenant ID");
+
+                    })
+            );
+        }
+
+        if(request.getName() != null) {
+            new_rent.setName(request.getName());
+        }
+
+        return rentRepository.save(new_rent);
     }
 
     public void delete_rent(String id) {

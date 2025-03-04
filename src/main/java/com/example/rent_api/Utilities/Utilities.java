@@ -4,6 +4,7 @@ import com.example.rent_api.Rent.Rent;
 import com.example.rent_api.Utility.Utility;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class Utilities {
     // oneToMany
     private Rent rent_id;
 
+    @DBRef(lazy = true)
     private List<Utility> utilities;
 
 
