@@ -1,17 +1,13 @@
 package com.example.rent_api.Utilities;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/utilities")
+@AllArgsConstructor
 public class UtilitiesController {
     private final UtilitiesService utilitiesService;
-
-    @Autowired
-    public UtilitiesController(UtilitiesService utilitiesService) {
-        this.utilitiesService = utilitiesService;
-    }
 
     @GetMapping(path = "{id}")
     public Utilities get_by_id(
@@ -22,7 +18,7 @@ public class UtilitiesController {
 
     @PostMapping()
     public Utilities create_utilities(
-            @RequestBody Utilities utilities
+            @RequestBody UtilitiesRequest utilities
     ) {
         return utilitiesService.create_utiltiies(utilities);
     }
