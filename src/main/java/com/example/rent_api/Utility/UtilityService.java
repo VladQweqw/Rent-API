@@ -1,5 +1,6 @@
 package com.example.rent_api.Utility;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -8,14 +9,9 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class UtilityService {
-
     private final UtilityRepository utilityRepository;
-
-    @Autowired
-    UtilityService(UtilityRepository utilityRepository) {
-        this.utilityRepository = utilityRepository;
-    }
 
     public String check() {
         return "Success";

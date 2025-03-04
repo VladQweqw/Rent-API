@@ -1,20 +1,13 @@
 package com.example.rent_api.Utility;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-
 
 @RestController
 @RequestMapping("/api/v1/utility")
+@AllArgsConstructor
 public class UtilityController {
     private final UtilityService utilityService;
-
-    @Autowired
-    UtilityController(UtilityService utilityService) {
-        this.utilityService = utilityService;
-    }
 
     @GetMapping("check")
     public String check_route() {
