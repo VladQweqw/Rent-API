@@ -27,9 +27,8 @@ public class UserService {
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
     public Boolean check_password(String encrypted, String decrypted) {
-        String encoded = encoder.encode(decrypted);
 
-        return encrypted.equals(encoded);
+        return encoder.matches(decrypted, encrypted);
     }
 
     public User register_user(User user) {
@@ -45,14 +44,14 @@ public class UserService {
 
     public User login_user(UserLoginRequest credentials) {
         User found = userRepository.findbyEmail(credentials.getEmail()).orElseThrow(() -> {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid User ID");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid User ID");
         });
 
 
         if(check_password(found.getPassword(), credentials.getPassword())) {
             return found;
         }else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Wrong password");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wrong password");
         }
     }
 
