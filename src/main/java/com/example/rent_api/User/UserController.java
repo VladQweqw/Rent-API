@@ -1,9 +1,9 @@
 package com.example.rent_api.User;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin()
 @RestController
 @RequestMapping("/api/v1/user")
 @AllArgsConstructor
@@ -39,9 +39,10 @@ public class UserController {
     @PutMapping(path = "{id}")
     public User update_user(
             @PathVariable("id") String id,
-            @RequestBody User new_user
+            @RequestBody User new_user,
+            @RequestParam String type
     ) {
-        return userService.update_user(id, new_user);
+        return userService.update_user(id, new_user, type);
     }
 
     @PutMapping(path = "rent/{id}")
@@ -51,6 +52,7 @@ public class UserController {
     ) {
         return userService.add_rent_to_user(user_id, rent_id);
     }
+
 
     @DeleteMapping(path = "rent/{id}")
     public User remove_rent_from_user(

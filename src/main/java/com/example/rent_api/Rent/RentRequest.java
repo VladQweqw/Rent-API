@@ -9,6 +9,4 @@ public class RentRequest {
     private String landlord;
     private String tenant;
     private String utilities;
-
-
 }

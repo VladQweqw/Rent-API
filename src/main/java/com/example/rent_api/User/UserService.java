@@ -2,7 +2,6 @@ package com.example.rent_api.User;
 
 import com.example.rent_api.Rent.Rent;
 import com.example.rent_api.Rent.RentRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -63,15 +62,20 @@ public class UserService {
     }
 
     // not to be used when chanign rents
-    public User update_user(String id, User new_user) {
+    public User update_user(String id, User new_user, String type) {
         User user = userRepository.findById(id).orElseThrow(() -> {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid User ID");
         });
 
-        user.setEmail(new_user.getEmail());
-        user.setName(new_user.getName());
-        user.setPassword(new_user.getPassword());
-        user.setPhone_number(new_user.getPhone_number());
+        if(!type.isEmpty()) {
+            user.setType(type);
+        }else {
+            user.setEmail(new_user.getEmail());
+            user.setName(new_user.getName());
+            user.setPassword(new_user.getPassword());
+            user.setPhone_number(new_user.getPhone_number());
+        }
+
 
         return userRepository.save(user);
     }
