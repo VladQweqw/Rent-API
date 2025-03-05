@@ -15,11 +15,18 @@ public class UserController {
         return userService.check();
     }
 
-    @PostMapping
+    @PostMapping("register")
     public User create_user(
             @RequestBody User user
     ) {
-        return userService.create_user(user);
+        return userService.register_user(user);
+    }
+
+    @PostMapping("login")
+    public User login_user(
+            @RequestBody UserLoginRequest user
+    ) {
+        return userService.login_user(user);
     }
 
     @GetMapping(path = "{id}")
