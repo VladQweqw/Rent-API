@@ -20,16 +20,17 @@ public class Rent {
     private String rent_identification = "";
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonBackReference()
+    @JsonBackReference("landlordReference")
     @DBRef(lazy = true)
     private User landlord;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonBackReference()
+    @JsonBackReference("tenantReference")
     @DBRef(lazy = true)
     private User tenant;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonBackReference("utilitiesReference")
     @DBRef(lazy = true)
     private Utilities utilities;
 

@@ -27,9 +27,14 @@ public class User {
     private String password;
     private String phone_number;
 
-    @JsonManagedReference()
+
+    @JsonManagedReference("landlordReference")
     @DBRef(lazy = true)
-    private List<Rent> rents = new ArrayList<>();
+    private List<Rent> landlord_rents = new ArrayList<>();
+
+    @JsonManagedReference("tenantReference")
+    @DBRef(lazy = true)
+    private List<Rent> tenant_rents = new ArrayList<>();
 
     // landlord / tenant
     private String type;

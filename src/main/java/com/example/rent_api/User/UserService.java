@@ -89,7 +89,13 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid Rent ID");
         });
 
-        user.getRents().add(rent);
+
+        if(user.getType().equals("tenant")) {
+            user.getTenant_rents().add(rent);
+        }else {
+            user.getLandlord_rents().add(rent);
+        }
+
         return userRepository.save(user);
     }
 
@@ -102,8 +108,12 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid Rent ID");
         });
 
+        if(user.getType().equals("tenant")) {
+            user.getTenant_rents().remove(rent);
+        }else {
+            user.getLandlord_rents().remove(rent);
+        }
 
-        user.getRents().remove(rent);
         return userRepository.save(user);
     }
 

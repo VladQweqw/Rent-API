@@ -52,12 +52,12 @@ public class RentService {
             );
         }
 
-        List<Rent> rents = landlord.getRents();
+        List<Rent> rents = landlord.getLandlord_rents();
         Rent created_rent = rentRepository.save(rent);
 
 
         rents.add(created_rent);
-        landlord.setRents(rents);
+        landlord.setLandlord_rents(rents);
         userRepository.save(landlord);
 
         return created_rent;
