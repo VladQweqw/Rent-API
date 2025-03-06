@@ -3,6 +3,7 @@ package com.example.rent_api.Utility;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin()
 @RestController
 @RequestMapping("/api/v1/utility")
 @AllArgsConstructor

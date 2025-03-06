@@ -1,5 +1,6 @@
 package com.example.rent_api.Rent;
 
+import com.example.rent_api.Utility.Utility;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +32,14 @@ public class RentController {
             @RequestBody RentRequest rent
     ) {
         return rentService.update_rent(id, rent);
+    }
+
+    @PutMapping(path = "{id}/utilities")
+    public Rent add_utility_to_rent(
+            @PathVariable("id") String rent_id,
+            @RequestBody Utility utility
+    ) {
+        return rentService.add_utility_to_rent(rent_id, utility);
     }
 
 

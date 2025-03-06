@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
+
 @Data
 @Document
 public class Rent {
@@ -30,7 +31,6 @@ public class Rent {
     private User tenant;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonBackReference("utilitiesReference")
     @DBRef(lazy = true)
     private Utilities utilities;
 
